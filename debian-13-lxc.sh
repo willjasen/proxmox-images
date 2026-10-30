@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Update the operating system
-apt update -qq && DEBIAN_FRONTEND=noninteractive apt upgrade -y -qq;
+apt update -qq >/dev/null && DEBIAN_FRONTEND=noninteractive apt upgrade -y -qq >/dev/null;
 
 # Install common tools that are not already installed
 common_tools="apt-transport-https bind9-dnsutils curl git gh htop iputils-ping jq locate nano net-tools openssl rsync ssh sudo tmux wget"
@@ -14,7 +14,7 @@ done
 
 if [ -n "$missing_tools" ]; then
     # Intentional word splitting passes each missing package as an apt argument.
-    apt install $missing_tools -y -qq;
+    apt install $missing_tools -y -qq >/dev/null;
 else
     echo "Common tools are already installed; skipping installation."
 fi
@@ -27,7 +27,4 @@ else
 fi
 
 # Clean up no longer needed dependencies
-apt autoremove -y -qq;
-
-# End of the script
-echo " The script is finished.";
+apt autoremove -y -qq >/dev/null;
