@@ -3,8 +3,21 @@
 # Update the operating system
 apt update -qq && DEBIAN_FRONTEND=noninteractive apt upgrade -y -qq;
 
-# Install common tools
-apt install apt-transport-https curl dnsutils git gh htop iputils-ping jq locate nano net-tools openssl rsync ssh sudo tmux wget -y -qq;
+# Install common tools that are not already installed
+common_tools="apt-transport-https curl dnsutils git gh htop iputils-ping jq locate nano net-tools openssl rsync ssh sudo tmux wget"
+missing_tools=""
+for package in $common_tools; do
+    if [ "$(dpkg-query -W -f='${db:Status-Status}' "$package" 2>/dev/null)" != "installed" ]; then
+        missing_tools="$missing_tools $package"
+    fi
+done
+
+if [ -n "$missing_tools" ]; then
+    # Intentional word splitting passes each missing package as an apt argument.
+    apt install $missing_tools -y -qq;
+else
+    echo "Common tools are already installed; skipping installation."
+fi
 
 # Install Tailscale only when it is not already available
 if command -v tailscale >/dev/null 2>&1; then
