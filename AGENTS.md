@@ -13,6 +13,4 @@ This repository contains helper scripts for preparing Proxmox image templates. K
 
 ## Documentation
 
-- Keep `README.md` aligned with the scripts and their intended use.
-- Keep `runbooks/README.md` as a concise index of runbooks. Runbooks record task-specific objectives, actions, verification, and final state; correct factual errors when maintaining them.
-- Do not include credentials, private keys, or other secrets in repository files.
+- Runbooks are not needed for this project.
