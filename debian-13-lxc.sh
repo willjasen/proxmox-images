@@ -4,7 +4,7 @@
 apt update -qq && DEBIAN_FRONTEND=noninteractive apt upgrade -y -qq;
 
 # Install common tools that are not already installed
-common_tools="apt-transport-https curl dnsutils git gh htop iputils-ping jq locate nano net-tools openssl rsync ssh sudo tmux wget"
+common_tools="apt-transport-https bind9-dnsutils curl git gh htop iputils-ping jq locate nano net-tools openssl rsync ssh sudo tmux wget"
 missing_tools=""
 for package in $common_tools; do
     if [ "$(dpkg-query -W -f='${db:Status-Status}' "$package" 2>/dev/null)" != "installed" ]; then
