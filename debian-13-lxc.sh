@@ -6,6 +6,9 @@ apt update -qq && DEBIAN_FRONTEND=noninteractive apt upgrade -y -qq;
 # Install common tools
 apt install apt-transport-https curl dnsutils git gh iputils-ping jq locate nano net-tools openssl ssh tmux wget -y -qq;
 
+# Install Tailscale
+curl -fsSL https://tailscale.com/install.sh | sh;
+
 # Clean up no longer needed dependencies
 apt autoremove -y -qq;
 
